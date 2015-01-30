@@ -1,0 +1,25 @@
+<h1>Order - Details</h1>
+<h2>Item's selected for purchase</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>product</th>
+            <th>unit price</th>
+            <th>order items</th>
+            <th>price</th>
+            <th>action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in shop.basket">
+            <td>{{item.name}}</td>
+            <td>{{item.price}}</td>
+            <td>{{item.orderedItems}}</td>
+            <td>{{item.orderedItems * item.price}}</td>
+            <td><button class="btn btn-default" ng-click="pageEvent('removeItem',item.count)">Remove</button></td>
+        </tr>
+    </tbody>
+</table>
+<button class="btn btn-default" ng-click="pageEvent('more')">Add more</button>
+<button class="btn btn-primary" ng-click="pageEvent('proceed')">Proceed</button>
+<button class="btn btn-danger" ng-click="pageEvent('cancel')">Cancel</button>

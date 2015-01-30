@@ -1,0 +1,25 @@
+<h1>Products</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>product</th>
+            <th>unit price</th>
+            <th>order items</th>
+            <th>action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="product in shop.products">
+            <td>{{product.name}}</td>
+            <td>{{product.price}}</td>
+            <td><input ng-model="product.orderedItems"></td>
+            <td>
+                <button type="button" class="btn btn-default" ng-click="pageEvent('addItems',product.id,1)">add</button>
+                <button type="button" class="btn btn-default" ng-click="pageEvent('removeItems',product.id,1)">remove</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<button type="button" class="btn btn-default" ng-click="pageEvent('home')">Home</button>
+<button type="button" class="btn btn-primary" ng-click="pageEvent('checkout')">Checkout basket</button>
