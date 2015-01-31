@@ -42,19 +42,32 @@ module.exports = function (grunt) {
         watch: {
             app: {
                 files: ['client/**.js'],
-                tasks:['generate']
+                tasks:['generate'],
+                options: {
+                    spawn:true
+                }
             }
         },
         'http-server': {
-            demo: {
+            app: {
                 root:'./app',
                 host:'127.0.0.1',
+                port:8282,
                 autoIndex: true,
                 ext: 'html'
+            },
+            watch: {
+                root:'./app',
+                host:'127.0.0.1',
+                port:8282,
+                autoIndex: true,
+                ext: 'html',
+                runInBackground:true
             }
         }
     });
     grunt.loadNpmTasks('grunt-http-server');
     grunt.registerTask('generate', ['less','copy','browserify']);
     grunt.registerTask('default', 'generate');
+    grunt.registerTask('watch-serve', ['http-server:watch','watch:app']);
 };

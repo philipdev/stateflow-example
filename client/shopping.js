@@ -173,7 +173,7 @@ module.exports = function() {
             return new Page($rootScope);
         }
     ]);
-
+// test
     appModule.factory('shopping', ['$rootScope','shop','page', shoppingFlowFactory]);
     appModule.controller('PageController', ['$scope','page', function($scope, page){
         $scope.send = function(event, data) {
