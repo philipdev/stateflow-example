@@ -1,8 +1,11 @@
 <h1>Order - Confirm</h1>
 <h2>Verify your order and press 'Confirm'</h2>
-<div class="col-md-offset-4">
-    <button class="btn btn-default" ng-click="pageEvent('back')">Back</button>
-    <button class="btn btn-default" ng-click="pageEvent('more')">Add more</button>
-    <button class="btn btn-primary" ng-click="pageEvent('confirm')">Confirm</button>
-    <button class="btn btn-danger" ng-click="pageEvent('cancel')">Cancel</button>
+
+
+
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <button class="btn btn-default col-md-2" ng-click="pageEvent('back')">back</button>
+    <button class="btn btn-default col-md-2" ng-click="pageEvent('more')">add more</button>
+    <button class="btn btn-primary col-md-offset-4 col-md-2" ng-click="pageEvent('confirm')">confirm</button>
+    <button class="btn btn-danger col-md-2" ng-click="pageEvent('cancel')">cancel</button>
 </div>

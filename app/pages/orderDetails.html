@@ -16,13 +16,20 @@
             <td>{{item.price}}</td>
             <td>{{item.orderedItems}}</td>
             <td>{{item.orderedItems * item.price}}</td>
-            <td><button class="btn btn-default" ng-click="pageEvent('removeItem',item.count)">Remove</button></td>
+            <td>
+                <button class="btn btn-default" ng-click="pageEvent('addItems',1)">add</button>
+                <button class="btn btn-default" ng-click="pageEvent('removeItems',1)">remove</button>
+            </td>
         </tr>
     </tbody>
 </table>
 
-<div class="col-md-offset-4">
-<button class="btn btn-default" ng-click="pageEvent('more')">Add more</button>
-<button class="btn btn-primary" ng-click="pageEvent('proceed')">Proceed</button>
-<button class="btn btn-danger" ng-click="pageEvent('cancel')">Cancel</button>
+<div class="buttons">
+
+</div>
+
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <button class="btn btn-default col-md-offset-2 col-md-2" ng-click="pageEvent('more')">add more</button>
+    <button class="btn btn-primary col-md-offset-4 col-md-2" ng-click="pageEvent('proceed')">proceed</button>
+    <button class="btn btn-danger col-md-2" ng-click="pageEvent('cancel')">cancel</button>
 </div>

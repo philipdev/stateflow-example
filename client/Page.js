@@ -19,4 +19,8 @@ Page.prototype.setPage = function (url) {
     this.scope.pageTemplateUrl = url;
 };
 
+Page.prototype.set = function (key, value) {
+  this.scope[key] = value;
+};
+
 module.exports = Page;

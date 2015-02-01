@@ -15,7 +15,7 @@ module.exports = function (grunt) {
         less: {
             dev: { // TODO: add mimify
                 options: {
-                    paths: ["assets/css"]
+                    //paths: ["assets/css"]
                 },
                 files: {
                     "<%=config.appBase%>/build/css/bootstrap.css": "less/bootstrap.less"
@@ -41,11 +41,8 @@ module.exports = function (grunt) {
         },
         watch: {
             app: {
-                files: ['client/**.js'],
-                tasks:['generate'],
-                options: {
-                    spawn:true
-                }
+                files: ['client/**.js','less/*.less'],
+                tasks:['generate']
             }
         },
         'http-server': {

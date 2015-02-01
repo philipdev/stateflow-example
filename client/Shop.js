@@ -70,7 +70,10 @@ Shop.prototype.updateProducts = function (cb) {
 };
 
 Shop.prototype.getProductById = function (id, cb) {
-    cb(undefined,this.findProduct(this.products, id));
+   var product = this.findProduct(this.products, id)
+    setTimeout(function () {
+       cb(undefined, product );
+   },500);
 };
 
 module.exports = Shop;

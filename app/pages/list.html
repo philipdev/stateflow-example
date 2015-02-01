@@ -1,19 +1,21 @@
 <h1>Products</h1>
 
-<table class="table">
+<table class="table table-striped table-bordered table-hover" data-toggle="table">
     <thead>
         <tr>
             <th>product</th>
             <th>unit price</th>
             <th>order items</th>
+            <th>total price</th>
             <th>action</th>
         </tr>
     </thead>
     <tbody>
         <tr ng-repeat="product in shop.products">
-            <td>{{product.name}}</td>
+            <td ng-click="pageEvent('details', product.id)">{{product.name}}</td>
             <td>{{product.price}}</td>
-            <td><input ng-model="product.orderedItems"></td>
+            <td>{{product.orderedItems ? product.orderedItems : ''}}</td>
+            <td>{{product.orderedItems ? product.orderedItems * product.price :''}}</td>
             <td>
                 <button type="button" class="btn btn-default" ng-click="pageEvent('addItems',product.id,1)">add</button>
                 <button type="button" class="btn btn-default" ng-click="pageEvent('removeItems',product.id,1)">remove</button>
@@ -21,8 +23,8 @@
         </tr>
     </tbody>
 </table>
-        
-<div class="col-md-offset-4">
-    <button type="button" class="btn btn-default" ng-click="pageEvent('home')">Home</button>
-    <button type="button" class="btn btn-primary" ng-click="pageEvent('checkout')">Checkout basket</button>
+
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+        <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('home')">home</button>
+        <button type="button" class="btn btn-primary col-md-2 col-md-offset-6" ng-click="pageEvent('checkout')">checkout basket</button>
 </div>

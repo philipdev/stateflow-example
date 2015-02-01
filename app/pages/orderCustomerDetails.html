@@ -1,41 +1,47 @@
 <h1>Order - Customer details</h1>
 
-        <form class="form-horizontal" role="form">
-        <div class="form-group">
-            <label class="col-md-2 control-label">Name</label>
-            <div class="col-md-6">
-                <input name="regular" class="form-control" type="text">
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="email" class="col-md-2 control-label">Email</label>
-            <div class="col-md-6">
-                <input id="email" class="form-control" name="pass" type="text">
-            </div>
-        </div>
+<form class="form-horizontal col-md-11" role="form">
+    <div class="form-group">
+        <label class="col-md-2 control-label">Name</label>
 
-        <div class="form-group">
-            <label for="email2" class="col-md-2 control-label">Email</label>
-            <div class="col-md-6">
-                <input id="email2" class="form-control" name="pass" type="text">
-            </div>
+        <div class="col-md-6">
+            <input name="regular" class="form-control" type="text">
         </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-md-2 control-label">Email</label>
 
-        <div class="form-group">
-            <label for="creditCard" class="col-md-2 control-label">Credit card number</label>
-            <div class="col-md-6">
-                <input id="creditCard" class="form-control" name="pass" type="text">
-            </div>
-            <label for="ccv" class="col-md-1 control-label">CCV</label>
-            <div class="col-md-1">
-                <input id="ccv" class="form-control" name="pass" type="text">
-            </div>
+        <div class="col-md-6">
+            <input id="email" class="form-control" name="pass" type="text">
         </div>
-        </form>
+    </div>
 
-<div class="col-md-offset-4">
-    <button class="btn btn-default" ng-click="pageEvent('back')">Back</button>
-    <button class="btn btn-default" ng-click="pageEvent('more')">Add more</button>
-    <button class="btn btn-primary" ng-click="pageEvent('proceed')">Proceed</button>
-    <button class="btn btn-danger" ng-click="pageEvent('cancel')">Cancel</button>
+    <div class="form-group">
+        <label for="email2" class="col-md-2 control-label">Email</label>
+
+        <div class="col-md-6">
+            <input id="email2" class="form-control" name="pass" type="text">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="creditCard" class="col-md-2 control-label">Credit card number</label>
+
+        <div class="col-md-6">
+            <input id="creditCard" class="form-control" name="pass" type="text">
+        </div>
+        <label for="ccv" class="col-md-1 control-label">CCV</label>
+
+        <div class="col-md-1">
+            <input id="ccv" class="form-control" name="pass" type="text">
+        </div>
+    </div>
+</form>
+
+
+<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+    <button class="btn btn-default col-md-2" ng-click="pageEvent('back')">back</button>
+    <button class="btn btn-default col-md-2" ng-click="pageEvent('more')">add more</button>
+    <button class="btn btn-primary col-md-offset-4 col-md-2" ng-click="pageEvent('proceed')">proceed</button>
+    <button class="btn btn-danger col-md-2" ng-click="pageEvent('cancel')">cancel</button>
 </div>
