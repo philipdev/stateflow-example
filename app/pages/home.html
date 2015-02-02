@@ -1,8 +1,23 @@
 <h1>Home</h1>
+<div id="productsCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+    <!-- Wrapper for slides -->
+    <div  class="carousel-inner">
+        <div class="jumbotron item {{ $first ? 'active' :''}}" ng-repeat="product in featuredProducts" ng-click="pageEvent('details', product.id)">
+            <h1>{{product.name}}</h1>
+            <h2>Only {{product.price}} EUR</h2>
+        </div>
+    </div>
 
+</div>
 
 <div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
     <button type="button" class="btn btn-primary col-md-offset-2 col-md-2" ng-click="pageEvent('list')">product list</button>
     <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('details','id')">product details</button>
     <button type="button" class="btn btn-default col-md-2 col-md-offset-2" ng-click="pageEvent('checkout')">Checkout basket</button>
 </div>
+
+<script>
+    $('#productsCarousel').ready( function() {
+        $('#productsCarousel').carousel();
+    });
+</script>

@@ -20,8 +20,20 @@ function createShopFlow(scope, shop, page) {
             scope.$apply();
         }
     });
-    shopping.registerAction('setPage', function () {
+    shopping.registerAction('setPage', function (complete) {
+
         this.get('page').setPage(this.config.page);
+        if(this.config.timeout) {
+            this.installTimeout(this.config.timeout, function() {
+                complete('timeout');
+                this.get('scope').$apply();
+            });
+            this.onStateActive('page', 'activity', function () {
+                /// this.installTimeout(); // not working needs fixing
+                this.installTimeout(this.config.timeout);
+                console.log('activity extend timeout');
+            });
+        }
     });
     return shopping;
 }

@@ -36,6 +36,13 @@ Shop.prototype.findProduct = function (array, id) {
     }
 };
 
+Shop.prototype.cancelOrders = function() {
+    this.basket.forEach( function(p) {
+        p.orderedItems = 0;
+    });
+    this.basket = [];
+};
+
 Shop.prototype.addBasketItem = function (id, count, cb) {
     var product;
     product = this.findProduct(this.basket, id);

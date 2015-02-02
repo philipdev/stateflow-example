@@ -11,6 +11,31 @@ function Page(scope) {
     scope.pageEvent = function (event,data) {
         self.emit.apply(self,arguments);
     };
+
+    scope.userActivity = function() {
+        self.emit('activity');
+    };
+
+    scope.removeListener = function (name, listener) {
+        var namedListeners = this.$$listeners[name];
+        if (namedListeners) {
+            // Loop through the array of named listeners and remove them from the array.
+            for (var i = 0; i < namedListeners.length; i++) {
+                if (namedListeners[i] === listener) {
+                    return namedListeners.splice(i, 1);
+                }
+            }
+        }
+    };
+
+    this.on('addListener', function(event, listener) {
+        scope.$on(event,listener);
+    });
+
+
+    this.on('removeListener', function(event, listener) {
+        scope.removeListener(event,listener);
+    });
 }
 
 util.inherits(Page, EventEmitter);

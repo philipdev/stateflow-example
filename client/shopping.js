@@ -7,7 +7,14 @@ module.exports.create = function() {
             type: 'begin',
             action: function (complete) {
                 this.get('page').setPage('pages/home.html'); // maybe a use case to have custom StateObjects?
+                this.get('page').set('featuredProducts', this.get('shop').products); // actually would like to set this to the inner scope, if there is such thing
 
+
+
+                this.onStateActive('page', 'details', function (id) {
+                    this.parent.emit('selectProduct', id);
+                    complete('details');
+                });
             },
             on: {
                 'page.list': 'list',
@@ -60,9 +67,11 @@ module.exports.create = function() {
                     console.log('selected product', id);
 
                     this.get('shop').getProductById(id, function (e, product) {
-                        self.selectedProduct = product;
-                        self.get('page').set('product', product);
-                        self.get('shop').emit('productAvailable', product);
+                        if(product) {
+                            self.selectedProduct = product;
+                            self.get('page').set('product', product);
+                            self.get('shop').emit('productAvailable', product);
+                        }
                     });
                 });
                 this.on('exit', function() {
@@ -72,9 +81,9 @@ module.exports.create = function() {
             },
             action: function (complete) {
                 this.get('page').setPage('pages/details.html');
-                if(!this.selectedProduct) {
+                if(!this.selectedProduct) { // double data with page.set('product'), must be avoided!
                     this.installTimeout(1000, function() {
-                        this.emit('timeout');
+                        complete('timeout');
                         this.get('scope').$apply();
                     });
                     this.onStateActive('shop', 'productAvailable', function () {
@@ -126,20 +135,24 @@ module.exports.create = function() {
                 enterDetails: {
                     page: 'pages/orderCustomerDetails.html',
                     action: 'setPage',
+                    timeout: 1000,
                     on: {
                         'page.back': 'overview',
                         'page.proceed': 'confirm',
                         'page.cancel': 'cancelOrder',
-                        'page.more': 'continueShopping'
+                        'page.more': 'continueShopping',
+                        'timeout': 'cancelOrder'
                     }
                 },
                 confirm: {
                     page: 'pages/orderConfirm.html',
                     action: 'setPage',
+                    timeout: 10000,
                     on: {
                         'page.back': 'enterDetails',
                         'page.confirm': 'showResults', // todo process order, then showResults
-                        'page.cancel': 'cancelOrder'
+                        'page.cancel': 'cancelOrder',
+                        'timeout': 'cancelOrder'
                     }
                 }, // TODO: process order: validate card etc.
                 showResults: {
@@ -158,12 +171,21 @@ module.exports.create = function() {
                 cancelOrder: { // customer want's clear the basket.
                     type: 'end',
                     action: function (cb) {
-                        cb('cancel');
+                        this.get('shop').cancelOrders();
+                        this.get('page').setPage('pages/orderCancelled.html');
+                        this.installTimeout(5000, function() {
+                            cb('cancel');
+                            this.get('scope').$apply();
+                        });
+                        this.onStateActive('page','home','cancel');
+
+                        //cb('cancel');
                     }
                 },
                 finish: {
                     type: 'end',
                     action: function (cb) {
+                        this.get('shop').cancelOrders();
                         cb('finish');
                     }
                 }
