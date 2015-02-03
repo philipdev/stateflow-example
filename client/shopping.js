@@ -5,15 +5,12 @@ module.exports.create = function() {
     return new StateFlow({
         home: {
             type: 'begin',
-            action: function (complete) {
+            action: function () {
                 this.get('page').setPage('pages/home.html'); // maybe a use case to have custom StateObjects?
                 this.get('page').set('featuredProducts', this.get('shop').products); // actually would like to set this to the inner scope, if there is such thing
-
-
-
                 this.onStateActive('page', 'details', function (id) {
                     this.parent.emit('selectProduct', id);
-                    complete('details');
+                    this.emit('details');
                 });
             },
             on: {
@@ -22,8 +19,9 @@ module.exports.create = function() {
                 'page.checkout': 'checkout'
             }
         },
+        
         list: {
-            action: function (complete) {
+            action: function () {
                 this.get('page').setPage('pages/list.html');
                 this.get('shop').updateProducts(); // update products
 
@@ -38,8 +36,8 @@ module.exports.create = function() {
                 });
 
                 this.installTimeout(10000, function () {
-                    complete('timeout');
-                    this.get('sync').update();
+                    this.emit('timeout');
+                    this.get('scope').$apply();
                 });
 
                 this.onStateActive('page', 'activity', function () {
@@ -49,7 +47,7 @@ module.exports.create = function() {
                 this.onStateActive('page', 'details', function (id) {
                     console.log('details',id);
                     this.parent.emit('selectProduct', id);
-                    complete('details');
+                    this.emit('details');
                 });
             },
             on: {
@@ -79,7 +77,7 @@ module.exports.create = function() {
                     this.get('page').set('product', undefined);
                 });
             },
-            action: function (complete) {
+            action: function (complete) { // TODO: allow array of action's.
                 this.get('page').setPage('pages/details.html');
                 if(!this.selectedProduct) { // double data with page.set('product'), must be avoided!
                     this.installTimeout(1000, function() {
@@ -92,7 +90,6 @@ module.exports.create = function() {
                         this.get('scope').$apply();
                     });
                 }
-
 
                 this.onStateActive('page', 'addItems', function (id, count) {
                     this.get('shop').addBasketItem(id, count, function () {
@@ -170,11 +167,11 @@ module.exports.create = function() {
                 },
                 cancelOrder: { // customer want's clear the basket.
                     type: 'end',
-                    action: function (cb) {
+                    action: function () {
                         this.get('shop').cancelOrders();
                         this.get('page').setPage('pages/orderCancelled.html');
                         this.installTimeout(5000, function() {
-                            cb('cancel');
+                            this.emit('cancel');
                             this.get('scope').$apply();
                         });
                         this.onStateActive('page','home','cancel');
@@ -184,9 +181,9 @@ module.exports.create = function() {
                 },
                 finish: {
                     type: 'end',
-                    action: function (cb) {
+                    action: function (complete) {
                         this.get('shop').cancelOrders();
-                        cb('finish');
+                        complete('finish');
                     }
                 }
             },

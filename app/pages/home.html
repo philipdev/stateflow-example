@@ -1,3 +1,8 @@
+<div class="navbar navbar-default navbar-top" role="navigation">
+    <button type="button" class="btn btn-primary  col-md-2" ng-click="pageEvent('list')">product list</button>
+    <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('checkout')">Checkout basket</button>
+</div>
+
 <h1>Home</h1>
 <div id="productsCarousel" class="carousel slide" data-ride="carousel" data-interval="3000">
     <!-- Wrapper for slides -->
@@ -10,11 +15,7 @@
 
 </div>
 
-<div class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-    <button type="button" class="btn btn-primary col-md-offset-2 col-md-2" ng-click="pageEvent('list')">product list</button>
-    <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('details','id')">product details</button>
-    <button type="button" class="btn btn-default col-md-2 col-md-offset-2" ng-click="pageEvent('checkout')">Checkout basket</button>
-</div>
+
 
 <script>
     $('#productsCarousel').ready( function() {
