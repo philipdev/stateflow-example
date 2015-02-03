@@ -1,9 +1,9 @@
 <div class="navbar navbar-default navbar-top" role="navigation">
+	<button type="button" class="btn btn-primary col-md-2" ng-click="pageEvent('checkout')">checkout</button>
+    <button type="button" class="btn btn-primary col-md-2" ng-click="pageEvent('list')">product list</button>
     <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('home')">home</button>
-    <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('list')">product list</button>
     <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('addItems', product.id, 1)">add</button>
     <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('removeItems', product.id, 1)">remove</button>
-    <button type="button" class="btn btn-default col-md-2" ng-click="pageEvent('checkout')">checkout basket</button>
 </div>
 
 <h1>Product details</h1>
@@ -11,6 +11,7 @@
     <div class="col-md-2">Product name</div>
     <div class="col-md-2">{{product.name}}</div>
 </div>
+
 <div class="row">
     <div class="col-md-2">Product price</div>
     <div class="col-md-2">{{product.price}}</div>

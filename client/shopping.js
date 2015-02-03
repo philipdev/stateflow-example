@@ -132,7 +132,7 @@ module.exports.create = function() {
                 enterDetails: {
                     page: 'pages/orderCustomerDetails.html',
                     action: 'setPage',
-                    timeout: 1000,
+                    timeout: 10000,
                     on: {
                         'page.back': 'overview',
                         'page.proceed': 'confirm',
